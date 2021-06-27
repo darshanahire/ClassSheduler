@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/btn.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
+    <title>ClassSheduler</title>
+</head>
+
+<body>
+
+    <div id="monthHeader">
+        <h3 class="heading"><i class="far fa-calendar-alt"></i> Calender</h3>
+        <h3 id="month" class="month">
+            <span id="month_year"></span>
+        </h3>
+        <ul>
+            <li class="monthbtn">
+                <a class="fas fa-caret-left" id="prevMonth"></a>
+                <a class="fas fa-caret-right" id="nextMonth"></a>
+            </li>
+            <li>
+                <div class="viewBtn">
+                    <select id="selecter" class="selecter" onchange="if(this.value == '') this.selectedIndex = 1; ">
+                        <option value="">Select View</option>
+                        <option value="one">Monthly</option>
+                        <option value="two">Weekly</option>
+                    </select>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <i onclick="showclasses()" class="fas fa-bell heading" id="dropbtn1"></i>
+                    <i onclick="hideclasses()" class="fas fa-bell heading" id="dropbtn2"></i>
+                    <div id="myDropdown" class="dropdown-content">
+                        <h3 style="margin:0;margin-top: 10px">Sheduled Lectures</h3>
+                        <div id="displayTab"> 
+                            <h5>Teacher</h5> 
+                             <h5>Date</h5>
+                            <h5>Month</h5>
+                            <h5>Time</h5>
+                        </div>
+                        {{#each results}}
+                        {{!-- <div>{{this.id}}</div>
+                        {{!-- <div>Teacher Date Month Time</div>
+                        {{#each results}} --}}
+                        {{!-- <div  style="text-align: inherit;">  {{this.Teacher}} {{this.Day}} {{this.Month}}  {{this.Time}}  </div>  --}}
+                        <div id="displayTab"> 
+                            <div>{{this.Teacher}}</div>
+                            <div>{{this.Day}}</div>
+                            <div>{{this.Month}}</div>
+                            <div>{{this.Time}}</div>
+                        </div> 
+                        {{/each}}
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+
+    </div>
+    <div id="weekDayName"></div>
+    <div id="calender"></div>
+    <div class="form-popup" id="myForm">
+
+
+
+
+
+
+
+        <form type="submit" action="/submit" method="POST" class="form-container">
+            <h1>Sedule Class</h1>
+            <select name="selectTeacher" id="selectTeacher" class="selectTeacher"
+                onchange="if(this.value == '') this.selectedIndex = 1; ">
+                <option value="">Select Teacher</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+            </select>
+            <select name="selectTMonth" id="selectTMonth" class="selectTeacher"
+                onchange="if(this.value == '') this.selectedIndex = 1; ">
+                <option value="">Select Month</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="Aug">Aug</option>
+                <option value="Sept">Sept</option>
+                <option value="Oct">Oct</option>
+                <option value="Nov">Nov</option>
+                <option value="Dec">Dec</option>
+            </select>
+            <select name="selectDate" id="selectDate" class="selectTeacher"
+                onchange="if(this.value == '') this.selectedIndex = 1; ">
+                <option value="">Select Day</option>
+                {{#times 31}}
+                <option value={{this}}>{{this}}</option>
+                {{/times}}
+            </select>
+
+            <select name="selectTime" id="selectTime" class="selectTime"
+                onchange="if(this.value == '') this.selectedIndex = 1; ">
+                <option value="">Select Timing</option>
+                <option value="07-09">07-09</option>
+                <option value="09-11">09-11</option>
+                <option value="11-01">11-01</option>
+                <option value="01-03">01-03</option>
+                <option value="03-05">03-05</option>
+                <option value="05-07">05-07</option>
+            </select>
+
+            <button id="fromData" class="btn">Create Class</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+        </form>
+    </div>
+    <button class="open-button" id="shedulerBtn" onclick="openForm()">Shedule Class</button>
+
+
+
+    <div id="allclassesid" style="color: white;">
+        {{!-- <div>Teacher Date Month Time</div> --}}
+        {{#each results}}
+        <div>{{this.id}}</div>
+        {{!-- <div>Teacher Date Month Time</div>
+        {{#each results}}
+        <div>{{this.Teacher}} {{this.Day}} {{this.Month}} {{this.Time}}</div> --}}
+        {{/each}}
+    </div>
+
+
+
+
+
+
+</body>
+<script src="/js/script.js"></script>
+
+
+</html>
