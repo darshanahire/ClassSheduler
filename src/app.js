@@ -36,7 +36,8 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) {
-        throw err;
+        console.log(err)
+        res.send(`Error occurs in database`);
     }
     console.log('Database Connected...');
 });
